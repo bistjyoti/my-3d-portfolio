@@ -2,6 +2,9 @@ import { useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Stars } from '@react-three/drei'
 
+// 🎵 TOP PE FILE IMPORT KARO (Vite isse assets me theek se build karega)
+import spaceMusic from '/space-music.mp3' 
+
 // 1. Central Pink Wireframe Sphere
 function MainPlanet() {
   const meshRef = useRef()
@@ -72,11 +75,12 @@ function ProjectCard({ title, desc, link, imgUrl }) {
 // 4. Main App Component
 function App() {
   const [isPlaying, setIsPlaying] = useState(false)
-  const [showMusicModal, setShowMusicModal] = useState(true) // Fix for sound issue!
+  const [showMusicModal, setShowMusicModal] = useState(true) 
   const audioRef = useRef(null)
 
   useEffect(() => {
-    const audio = new Audio('/space-music.mp3')
+    // 💡 AB HUM IMPORT KIYA HUA VARIABLE USE KARENGE
+    const audio = new Audio(spaceMusic)
     audio.loop = true
     audio.volume = 0.8 
     audioRef.current = audio
@@ -344,7 +348,6 @@ const audioButtonStyle = {
   transition: 'all 0.3s ease'
 }
 
-// 🎼 MODAL STYLING FOR AUDIO ISSUE FIX
 const modalOverlayStyle = {
   position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh',
   backgroundColor: 'rgba(0,0,0,0.85)', display: 'flex', justifyContent: 'center',
