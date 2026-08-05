@@ -2,10 +2,9 @@ import { useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Stars } from '@react-three/drei'
 
-// 🎵 TOP PE FILE IMPORT KARO (Vite isse assets me theek se build karega)
+
 import spaceMusic from '/space-music.mp3' 
 
-// 1. Central Pink Wireframe Sphere
 function MainPlanet() {
   const meshRef = useRef()
   useFrame((state, delta) => {
@@ -20,7 +19,7 @@ function MainPlanet() {
   )
 }
 
-// 2. Small Orbiting Spheres
+
 function SkillPlanet({ radius, speed, color, offset }) {
   const orbitRef = useRef()
   useFrame((state, delta) => {
@@ -49,14 +48,16 @@ function ProjectCard({ title, desc, link, imgUrl }) {
     >
       <h3 style={{ fontSize: '1.2rem', color: '#ff00ea', marginBottom: '5px' }}>{title}</h3>
       <p style={{ fontSize: '0.9rem', color: '#bbb', marginBottom: '10px' }}>{desc}</p>
-      <a href={link} target="_blank" rel="noopener noreferrer" style={{ color: '#00ffff', textDecoration: 'none', fontSize: '0.9rem' }}>
-        View on GitHub →
-      </a>
+      {link && (
+        <a href={link} target="_blank" rel="noopener noreferrer" style={{ color: '#00ffff', textDecoration: 'none', fontSize: '0.9rem' }}>
+          View Project →
+        </a>
+      )}
 
       {/* Floating Screenshot Preview on Hover */}
       {isHovered && imgUrl && (
         <div style={previewImageStyle}>
-          <div style={{ color: '#00ffff', fontSize: '0.75rem', marginBottom: '5px', letterSpacing: '1px' }}>PROJECT PREVIEW</div>
+          <div style={{ color: '#00ffff', fontSize: '0.75rem', marginBottom: '5px', letterSpacing: '1px' }}>PREVIEW</div>
           <img 
             src={imgUrl} 
             alt={title} 
@@ -72,14 +73,13 @@ function ProjectCard({ title, desc, link, imgUrl }) {
   )
 }
 
-// 4. Main App Component
+// 4. MAIN APP COMPONENT
 function App() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [showMusicModal, setShowMusicModal] = useState(true) 
   const audioRef = useRef(null)
 
   useEffect(() => {
-    // 💡 AB HUM IMPORT KIYA HUA VARIABLE USE KARENGE
     const audio = new Audio(spaceMusic)
     audio.loop = true
     audio.volume = 0.8 
@@ -91,7 +91,6 @@ function App() {
     }
   }, [])
 
-  // Auto-play hack upon clicking modal button
   const handleMusicPermission = (allow) => {
     setShowMusicModal(false)
     if (allow && audioRef.current) {
@@ -119,7 +118,6 @@ function App() {
   return (
     <div style={{ width: '100vw', height: '100vh', backgroundColor: '#0b0b14', position: 'relative', overflow: 'hidden' }}>
       
-      {/* 🔮 FIX FOR SOUND ISSUE: MODAL POPUP */}
       {showMusicModal && (
         <div style={modalOverlayStyle}>
           <div style={modalBoxStyle}>
@@ -135,18 +133,14 @@ function App() {
         </div>
       )}
 
-      {/* 🎵 AUDIO TOGGLE BUTTON */}
-      <button 
-        onClick={toggleMusic}
-        style={audioButtonStyle}
-      >
+      <button onClick={toggleMusic} style={audioButtonStyle}>
         {isPlaying ? '🔊 MUSIC ON' : '🔈 MUSIC OFF'}
       </button>
 
       {/* 🌟 LEFT SIDE: INTRO */}
       <div style={{
         position: 'absolute',
-        top: '8%',
+        top: '5%',
         left: '5%',
         zIndex: 10,
         fontFamily: "'Segoe UI', Roboto, sans-serif",
@@ -161,22 +155,24 @@ function App() {
           I'm Jyoti Bist
         </h1>
 
-        <h2 style={{ fontSize: '1.5rem', color: '#00ffff', marginBottom: '20px', fontWeight: '500' }}>
+        <h2 style={{ fontSize: '1.5rem', color: '#00ffff', marginBottom: '15px', fontWeight: '500' }}>
           Creative Frontend Developer
         </h2>
         
-        <p style={{ fontSize: '1rem', color: '#aaaaaa', lineHeight: '1.6', marginBottom: '30px' }}>
-          Hailing from the beautiful lands of **Nepal** and currently pursuing my B.Tech at **Roorkee Institute of Technology**, Uttarakhand (Final Year!). I build immersive and interactive digital experiences.
+        <p style={{ fontSize: '1rem', color: '#aaaaaa', lineHeight: '1.6', marginBottom: '20px' }}>
+          Hailing from the beautiful lands of **Nepal** and recently graduated from **Roorkee Institute of Technology**, Uttarakhand. I build immersive and interactive digital experiences.
         </p>
 
-        <div style={{ display: 'flex', gap: '15px' }}>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           <a href="https://in.linkedin.com/in/jyoti-bist-972604254" target="_blank" rel="noopener noreferrer" style={buttonStyle('#ff00ea')}>LinkedIn</a>
           <a href="https://github.com/bistjyoti" target="_blank" rel="noopener noreferrer" style={buttonStyle('#00ffff')}>GitHub</a>
           <a href="mailto:bistjyoti64@gmail.com" style={buttonStyle('#ffffff')}>Email</a>
+          <a href="https://leetcode.com/u/Jyoti_Bist/" target="_blank" rel="noopener noreferrer" style={buttonStyle('#FFA116')}>LeetCode</a>
+          <a href="https://www.hackerrank.com/profile/bistjyoti64" target="_blank" rel="noopener noreferrer" style={buttonStyle('#2EC866')}>HackerRank</a>
         </div>
       </div>
 
-      {/* 🚀 RIGHT SIDE: DETAILS (Scrollable Pane) */}
+      {/* 🚀 RIGHT SIDE: DETAILS */}
       <div style={{
         position: 'absolute',
         top: '10%',
@@ -221,41 +217,46 @@ function App() {
         {/* SECTION 3: MY PROJECTS */}
         <div style={{ marginBottom: '25px' }}>
           <h2 style={sectionHeaderStyle}>My Projects</h2>
+          
           <ProjectCard 
-            title="FocusFlow"
-            desc="Productivity app built with HTML, CSS & JS, using local storage for task tracking and session focus."
-            link="https://github.com/bistjyoti/focusflow"
-            imgUrl="" 
+            title="3D Developer Portfolio"
+            desc="An interactive 3D portfolio made with React, Three.js, and Fiber to showcase my creative work."
+            link="https://my-3d-portfolio-taupe.vercel.app"
+            imgUrl={`${import.meta.env.BASE_URL}3d developer portfolio.png`} 
           />
-          <ProjectCard 
-            title="Medicine Reminder"
-            desc="Voice-enabled timer app using JavaScript, hosted on GitHub Pages."
-            link="https://github.com/bistjyoti/medicine-reminder"
-            imgUrl="" 
-          />
+          
           <ProjectCard 
             title="Jio-Hotstar Clone"
             desc="A replica of the Jio-Hotstar OTT platform. Focused on rich UI components."
             link="https://github.com/bistjyoti/jio-hotstar-clone"
-            imgUrl="/jio.png" 
+            imgUrl={`${import.meta.env.BASE_URL}jio.png`} 
           />
+          
           <ProjectCard 
             title="DineAtDoor"
             desc="A dynamic web application for ordering food online. Built with a smooth cart experience."
             link="https://github.com/bistjyoti/DineAtDoor"
-            imgUrl="/home.png" 
+            imgUrl={`${import.meta.env.BASE_URL}home.png`} 
           />
         </div>
 
-        {/* SECTION 4: RESEARCH & CERTS */}
-        <div>
-          <h2 style={sectionHeaderStyle}>Research & Certifications</h2>
-          <div style={projectCardStyle}>
-            <h3 style={{ fontSize: '1.1rem', color: '#ff00ea', marginBottom: '5px' }}>Augmented Reality - An Overview</h3>
-            <p style={{ fontSize: '0.85rem', color: '#bbb', marginBottom: '8px' }}>Academic Research Paper published/submitted in 2022.</p>
-            <span style={{ color: '#00ffff', fontSize: '0.8rem', fontWeight: 'bold' }}>📄 Certifications: IIT Bombay (C, Python, Java)</span>
+       {/* SECTION 4: RESEARCH & CERTS */}
+          <div>
+            <h2 style={sectionHeaderStyle}>Research & Certifications</h2>
+            
+            <ProjectCard 
+              title="Augmented Reality - An Overview"
+              desc="Academic Research Paper published/submitted in 2022. Explores AR technologies and their impact."
+              link="" 
+              imgUrl={`${import.meta.env.BASE_URL}research-paper.jpeg`} /* 👈 Ye solid tarika wapis likh do! */
+            />
+
+            <div style={projectCardStyle}>
+              <span style={{ color: '#00ffff', fontSize: '0.9rem', fontWeight: 'bold' }}>📄 Certifications: IIT Bombay (C, Python, Java)</span>
+            </div>
           </div>
-        </div>
+
+         
 
       </div>
 
@@ -268,7 +269,6 @@ function App() {
         
         <MainPlanet />
 
-        {/* Orbiting balls */}
         <SkillPlanet radius={2.2} speed={0.5} color="#00ffff" offset={0} />
         <SkillPlanet radius={2.5} speed={0.3} color="#ffff00" offset={0.5} />
         <SkillPlanet radius={2.8} speed={0.4} color="#00ff00" offset={-0.5} />
