@@ -36,7 +36,6 @@ function SkillPlanet({ radius, speed, color, offset }) {
   )
 }
 
-// 3. Project Card Component with Image Hover State
 function ProjectCard({ title, desc, link, imgUrl }) {
   const [isHovered, setIsHovered] = useState(false)
 
@@ -54,7 +53,6 @@ function ProjectCard({ title, desc, link, imgUrl }) {
         </a>
       )}
 
-      {/* Floating Screenshot Preview on Hover */}
       {isHovered && imgUrl && (
         <div style={previewImageStyle}>
           <div style={{ color: '#00ffff', fontSize: '0.75rem', marginBottom: '5px', letterSpacing: '1px' }}>PREVIEW</div>
@@ -73,7 +71,6 @@ function ProjectCard({ title, desc, link, imgUrl }) {
   )
 }
 
-// 4. MAIN APP COMPONENT
 function App() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [showMusicModal, setShowMusicModal] = useState(true) 
@@ -137,7 +134,6 @@ function App() {
         {isPlaying ? '🔊 MUSIC ON' : '🔈 MUSIC OFF'}
       </button>
 
-      {/* 🌟 LEFT SIDE: INTRO */}
       <div style={{
         position: 'absolute',
         top: '5%',
@@ -172,7 +168,7 @@ function App() {
         </div>
       </div>
 
-      {/* 🚀 RIGHT SIDE: DETAILS */}
+  
       <div style={{
         position: 'absolute',
         top: '10%',
@@ -240,7 +236,6 @@ function App() {
           />
         </div>
 
-       {/* SECTION 4: RESEARCH & CERTS */}
           <div>
             <h2 style={sectionHeaderStyle}>Research & Certifications</h2>
             
@@ -248,7 +243,7 @@ function App() {
               title="Augmented Reality - An Overview"
               desc="Academic Research Paper published/submitted in 2022. Explores AR technologies and their impact."
               link="" 
-              imgUrl={`${import.meta.env.BASE_URL}research-paper.jpeg`} /* 👈 Ye solid tarika wapis likh do! */
+              imgUrl={`${import.meta.env.BASE_URL}research-paper.jpeg`} 
             />
 
             <div style={projectCardStyle}>
